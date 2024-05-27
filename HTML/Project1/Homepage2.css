@@ -1,0 +1,30 @@
+h1 {
+    font-size: 100px;
+}
+
+#header1 {
+    text-align: center;
+    background-color: darkslategray;
+}
+
+#Author {
+    text-align: center;
+    font-size: 40px;
+}
+
+p {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+}
+
+.image1 {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+  height: 700px;
+}
+
+body {background-color:darkgoldenrod;}
