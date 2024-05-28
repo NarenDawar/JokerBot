@@ -4,7 +4,7 @@ const profileModel = require("../models/profileSchema");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("leaderboard")
+        .setName("coins-leaderboard")
         .setDescription("Shows the top 10 earners!"),
     async execute(interaction, profileData) {
         await interaction.deferReply();
