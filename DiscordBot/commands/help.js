@@ -4,7 +4,7 @@ const profileModel = require("../models/profileSchema");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("bot-info")
+        .setName("help")
         .setDescription("Information about the bot."),
     async execute(interaction, profileData) {
         const {embedColor} = profileData;
