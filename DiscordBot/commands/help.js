@@ -19,7 +19,7 @@ module.exports = {
             },
             {
                 name:'Functionality',
-                value: 'balance: Check your current balance\ndaily: Redeem daily reward\nuser-info: Check information of any user in the server (if registered).\nleaderboard: Check local leaderboard.\ntransfer: Transfer money to someone else.\nwork: Work for some money. Available once an hour.\nshop: Buy some cool aadd-ons. Shop in development.\nshop-info: Checks what is in the shop',
+                value: 'balance: Check your current balance\ndaily: Redeem daily reward\nuser-info: Check information of any user in the server (if registered).\nleaderboard: Check local leaderboard (coin-based ranking).\ntransfer: Transfer money to someone else.\nwork: Work for some money. Available once an hour.\nshop: Buy some cool aadd-ons. Shop in development.\nshop-info: Checks what is in the shop',
                 inline: true,
             },
             {
