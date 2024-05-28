@@ -5,7 +5,7 @@ const profileModel = require("../models/profileSchema");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("blackjack")
-        .setDescription("Bet on a coinflip, chances are 50/50!")
+        .setDescription("Bet on a classic game of blackjack.")
         .addIntegerOption((option) => 
             option
                 .setName("amount")
