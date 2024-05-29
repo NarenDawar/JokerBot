@@ -5,7 +5,7 @@ const { minBet, maxBet } = require("../globalValues.json");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("roulette2")
+        .setName("roulette")
         .setDescription("Returns your balance (number of coins!)")
         .addIntegerOption((option) => 
             option
