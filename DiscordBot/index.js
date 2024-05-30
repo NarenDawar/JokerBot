@@ -1,3 +1,4 @@
+// Can add GUILDID to env document for local experimentation.
 require("dotenv").config();
 const fs = require("node:fs");
 const path = require("node:path");
