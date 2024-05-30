@@ -21,7 +21,7 @@ module.exports = {
         const userDash = new EmbedBuilder()
             .setTitle('User Information')
             .setColor(embedColor)
-            .setThumbnail(interaction.user.displayAvatarURL())
+            .setThumbnail(recievingUser.displayAvatarURL())
             .setFooter({text: `As of ${ currentDateTime }`});
 
 
@@ -33,7 +33,7 @@ module.exports = {
 
         if(!recievingUserData) {
             await interaction.deferReply({ ephemeral: true });
-            transferDash.setDescription(`**${recievingUser.username}** is not in the system.`);
+            userDash.setDescription(`**${recievingUser.username}** is not in the system.`);
             return await interaction.editReply({ embeds : [userDash]});
         }
 
@@ -49,5 +49,6 @@ module.exports = {
         );
 
         interaction.editReply({ embeds : [userDash]});
+
     },
 };
