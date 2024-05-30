@@ -31,7 +31,7 @@ module.exports = {
         const topTen = members.slice(0,10);
         let desc = "";
         for(let  i=0; i < topTen.length; i++) {
-            let { user } = await interaction.member.fetch(topTen[i].userId); //line of interest, can add .guild. after interaction and member -> members
+            let user = await interaction.client.users.fetch(topTen[i].userId); //line of interest, can add .guild. after interaction and member -> members
             if(!user) return;
             let userWins = topTen[i].numOfWins;
             desc += `${i + 1}. ${user.username}: ${userWins} wins\n`;

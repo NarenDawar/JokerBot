@@ -14,12 +14,12 @@ module.exports = {
             .setColor(embedColor)
             .addFields({
                 name: 'Games',
-                value: 'coinflip: Bet on head/tails.\nrock-paper-scissors: Bet on a game of rps against a computer.\nblackjack: Classic game of blackjack.\nroulette (colors and numbers): Can pick to bet on colors or numbers. Numbers has 5x initial bet payout if you win.\nhorse-race: Three horses are generated with 3 different probailities of winning. Select one to win. Probabilities change on every new occurance',
+                value: '**coinflip**: Bet on head/tails.\n**rock-paper-scissors**: Bet on a game of rps against a computer.\n**blackjack**: Classic game of blackjack.\n**roulette (colors and numbers)**: Can pick to bet on colors or numbers. Numbers has 5x initial bet payout if you win.\n**horse-race**: Three horses are generated with 3 different probailities of winning. Select one to win. Probabilities change on every new occurance',
                 inline: true,
             },
             {
                 name:'Functionality',
-                value: 'balance: Check your current balance\ndaily: Redeem daily reward\nuser-info: Check information of any user in the server (if registered).\nleaderboard: Check local leaderboard (coin-based ranking).\ntransfer: Transfer money to someone else.\nwork: Work for some money. Available once an hour.\nshop: Buy some cool aadd-ons. Shop in development.\nshop-info: Checks what is in the shop',
+                value: '**balance**: Check your current balance\n**daily**: Redeem daily reward\n**user-info**: Check information of any user in the server (if registered).\n**leaderboard**: Check local leaderboard (coin-based ranking).\n**transfer**: Transfer money to someone else.\n**work**: Work for some money. Available once an hour.\n**shop**: Buy some cool add-ons. Shop in development.\n**shop-info**: Checks what is in the shop',
                 inline: true,
             },
             {
@@ -33,7 +33,7 @@ module.exports = {
                 inline: false,
 
             },
-            {
+            {  
                 name:'Server',
                 value: 'Join the community server below:\nhttps://discord.gg/uVvA8D6MJb',
             })
