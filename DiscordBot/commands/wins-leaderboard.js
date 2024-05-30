@@ -1,5 +1,4 @@
-const {SlashCommandBuilder} = require("discord.js");
-const { EmbedBuilder } = require("@discordjs/builders");
+const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const profileModel = require("../models/profileSchema");
 
 module.exports = {
@@ -26,16 +25,16 @@ module.exports = {
         const memberIds = members.findIndex((member) => member.userId === id);
 
         leaderboardEmbed.setFooter({
-            text: `**${username}, your rank is #**${memberIds + 1} with **${numOfWins}`,
+            text: `${username}, your rank is #${memberIds + 1} with ${numOfWins} wins`,
         });
 
         const topTen = members.slice(0,10);
         let desc = "";
         for(let  i=0; i < topTen.length; i++) {
-            let { user } = await interaction.guild.members.fetch(topTen[i].userId);
+            let { user } = await interaction.member.fetch(topTen[i].userId);
             if(!user) return;
             let userWins = topTen[i].numOfWins;
-            desc += `${i + 1}, ${user.username}: ${userWins} wins\n`;
+            desc += `${i + 1}. ${user.username}: ${userWins} wins\n`;
         }
 
         if (desc != "") {
