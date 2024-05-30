@@ -25,7 +25,7 @@ module.exports = {
             .setFooter({text: `As of ${ currentDateTime }`});
 
 
-        const recievingUserData = await profileModel.findOneAndUpdate(
+        const recievingUserData = await profileModel.findOne(
             {
                 userId: recievingUser.id,
             }
