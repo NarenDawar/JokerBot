@@ -3,9 +3,9 @@ require("dotenv").config();
 const fs = require("node:fs");
 const path = require("node:path");
 const mongoose = require("mongoose");
-
 const {DISCORD_TOKEN: token, MONGODB_SRV: database }= process.env;
 const {Client, GatewayIntentBits, Collection} = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder,ActionRowBuilder, ButtonBuilder, ButtonStyle} = require("discord.js");
 
 
 const client = new Client({
@@ -56,6 +56,61 @@ mongoose.connect(database, {
 	})
 	;
 
+const profileModel = require("./models/profileSchema");
+
+let messageCount = new Map();
+
+client.on('messageCreate', async message => {
+	if(!message.guild) return;
+
+	const channelId = message.channel.id;
+	messageCount.set(channelId, (messageCount.get(channelId) || 0) + 1);
+
+	if(messageCount.get(channelId) === 20) {
+		const embeder = new EmbedBuilder()
+			.setTitle("Surprise Drop")
+			.setDescription('Claim your coins!')
+			.setColor('Red')
+			.addFields({ name: 'Amount' , value: `${Math.floor(Math.random() * 1000 - 100 + 1)} coins`})
+			.setTimestamp();
+
+		const row = new ActionRowBuilder()
+		.addComponents(
+			new ButtonBuilder()
+				.setCustomId('claim')
+				.setLabel('Claim')
+				.setEmoji('🎁')
+				.setStyle(ButtonStyle.Primary)
+		);
+
+		message.channel.send( {embeds : [embeder], components: [row]});
+		messageCount = new Map();
+	}
+});
+
+client.on('interactionCreate', async interaction => {
+	if(interaction.customId === 'claim') {
+		const userId = interaction.user.id;
+		const user = await profileModel.findOne({ userId });
+		if(!user) {
+			return interaction.reply({content: 'You are not yet registered. Try playing a game first.'});
+		} else {
+			const claimCoins = Math.floor(Math.random() * (1000 - 100 + 1)) + 1000;
+			await profileModel.findOneAndUpdate({ userId}, {$inc : {coins: claimCoins}});
+
+			const row = new ActionRowBuilder()
+				.addComponents(
+					new ButtonBuilder()
+						.setCustomId('claim')
+						.setLabel('Claimed')
+						.setEmoji('⏱️')
+						.setStyle(ButtonStyle.Primary)
+						.setDisabled(true)
+				);
+			await interaction.update({ content: `Claim Successful! **${claimCoins}** coins have been added to your balance.`, components: [row]});
+		}
+	}
+})
 
 
 client.login(token);

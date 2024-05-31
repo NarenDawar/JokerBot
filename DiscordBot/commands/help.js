@@ -14,12 +14,12 @@ module.exports = {
             .setColor(embedColor)
             .addFields({
                 name: 'Games',
-                value: '**coinflip**: Bet on head/tails.\n**rock-paper-scissors**: Bet on a game of rps against a computer.\n**blackjack**: Classic game of blackjack.\n**roulette (colors and numbers)**: Can pick to bet on colors or numbers. Numbers has 5x initial bet payout if you win.\n**horse-race**: Three horses are generated with 3 different probailities of winning. Select one to win. Probabilities change on every new occurance',
+                value: '**coinflip**: Bet on head/tails.\n**rock-paper-scissors**: Bet on a game of rps against a computer.\n**blackjack**: Classic game of blackjack.\n**roulette (colors and numbers)**: Can pick to bet on colors or numbers. Numbers has 5x initial bet payout if you win.\n**horse-race**: Three horses are generated with 3 different probabilities of winning. Select one to win. Probabilities change on every new occurrence.',
                 inline: true,
             },
             {
                 name:'Functionality',
-                value: '**balance**: Check your current balance\n**daily**: Redeem daily reward\n**user-info**: Check information of any user in the server (if registered).\n**leaderboard**: Check local leaderboard (coin-based ranking).\n**transfer**: Transfer money to someone else.\n**work**: Work for some money. Available once an hour.\n**shop**: Buy some cool add-ons. Shop in development.\n**shop-info**: Checks what is in the shop',
+                value: '**balance**: Check your current balance.\n**daily**: Redeem daily reward.\n**user-info**: Check information of any user in the server (if registered).\n**leaderboard**: Check local leaderboard (coin-based ranking).\n**transfer**: Transfer money to someone else.\n**work**: Work for some money. Available once an hour.\n**shop**: Buy some cool add-ons. Shop in development.\n**shop-info**: Checks what is in the shop.',
                 inline: true,
             },
             {
@@ -32,6 +32,10 @@ module.exports = {
                 `5. Use toggles to change which channels allow commands.\n`,
                 inline: false,
 
+            },
+            {
+                name: "Ensuring Functionality (IMPORTANT)",
+                value: "There are two things you need to ensure so that this bot works.:\n1. Go to Sever Settings -> Integrations -> JokerBot -> Ensure the @everyone is green.\n2. Ensure that all roles in your server have the following permission turned on: Use Application Commands"
             },
             {  
                 name:'Server',

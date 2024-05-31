@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "discord-gamecord": "^4.4.2",
     "discord.js": "^14.15.2",
     "dotenv": "^16.4.5",
     "parse-ms-2": "^1.0.0",
