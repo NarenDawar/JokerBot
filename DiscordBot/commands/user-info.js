@@ -14,16 +14,13 @@ module.exports = {
     async execute(interaction, profileData) {
         const recievingUser = interaction.options.getUser("user");
 
-        const now = new Date();
-        const currentDateTime = now.toLocaleString();
         const { embedColor } = profileData;
 
         const userDash = new EmbedBuilder()
             .setTitle('User Information')
             .setColor(embedColor)
             .setThumbnail(recievingUser.displayAvatarURL())
-            .setFooter({text: `As of ${ currentDateTime }`});
-
+            .setTimestamp();
 
         const recievingUserData = await profileModel.findOne(
             {

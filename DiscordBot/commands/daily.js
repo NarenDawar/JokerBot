@@ -18,7 +18,7 @@ module.exports = {
         const currentDateTime = now.toLocaleString();
 
         let dailyDash = new EmbedBuilder()
-        .setTitle('Daily Coins')
+        .setTitle('Daily Coins 💸')
         .setColor(embedColor);
 
         const cooldown = 864000;

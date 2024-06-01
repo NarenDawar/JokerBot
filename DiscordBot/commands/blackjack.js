@@ -20,6 +20,7 @@ module.exports = {
         const { coins } = profileData;
         const {embedColor} = profileData;
         const blackjackEmbed = new EmbedBuilder().setColor(embedColor);
+        blackjackEmbed.setTitle('Blackjack 🃏')
 
         if (coins < betAmt) {
             blackjackEmbed.setDescription(`You do not have **${betAmt}** coins.`);
@@ -48,7 +49,7 @@ module.exports = {
 			.addComponents(hitButton, foldButton);
 
         blackjackEmbed
-            .setTitle("Blackjack Table")
+            .setTitle("Blackjack Table 🃏")
             .setFooter({text: `You have bet ${ betAmt } coins.`})
             .setDescription(`Would you like to hit or stay?\nYour current hand adds up to: **${ userStartHand }**`);
 

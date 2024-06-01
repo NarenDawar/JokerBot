@@ -23,7 +23,7 @@ module.exports = {
         const { coins, embedColor } = profileData;
 
         const slotDash = new EmbedBuilder()
-            .setTitle("Slots")
+            .setTitle("Slots 🎰")
             .setTimestamp()
             .setColor(embedColor);
 
@@ -41,7 +41,7 @@ module.exports = {
             message: interaction,
             isSlashGame: true,
             embed: {
-                title: 'Slot Machine',
+                title: 'Slot Machine 🎰',
                 color: embedColor.toString(),
             },
             slots: ['🍊', '🍎', '🍒', '🍌']
@@ -51,7 +51,7 @@ module.exports = {
             Game.on('gameOver', async result => {
                 if(result === 'win') {
                     await profileModel.findOneAndUpdate({userId}, { $inc: {coins: 2*betAmt}});
-                    interaction.followUp("`You **hit**! You have won **${betAmt*2}** coins!`");
+                    interaction.followUp(`You **hit**! You have won **${betAmt*2}** coins!`);
                 }
                 else {
                     await profileModel.findOneAndUpdate({userId}, { $inc: {coins: -betAmt}});

@@ -6,7 +6,7 @@ const { minBet, maxBet } = require("../globalValues.json");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("roulette")
-        .setDescription("Returns your balance (number of coins!)")
+        .setDescription("Bet on a game of roulette, colors or numbers!")
         .addIntegerOption((option) => 
             option
                 .setName("amount")
@@ -32,12 +32,12 @@ module.exports = {
 
         const colorsButton = new ButtonBuilder()
 			.setCustomId('Colors')
-			.setLabel('Colors')
+			.setLabel('Colors 🔴')
 			.setStyle(ButtonStyle.Primary);
 
 		const numbersButton = new ButtonBuilder()
 			.setCustomId('Numbers')
-			.setLabel('Numbers')
+			.setLabel('Numbers 🔢')
 			.setStyle(ButtonStyle.Primary);
 
         const row = new ActionRowBuilder()
@@ -73,12 +73,12 @@ module.exports = {
 
                 const redButton = new ButtonBuilder()
 			    .setCustomId('Red')
-			    .setLabel('Red')
+			    .setLabel('Red 🟥')
 			    .setStyle(ButtonStyle.Danger);
 
 		        const blackButton = new ButtonBuilder()
 			    .setCustomId('Black')
-			    .setLabel('Black')
+			    .setLabel('Black ⬛')
 			    .setStyle(ButtonStyle.Secondary);
 
                 const row2 = new ActionRowBuilder()

@@ -29,7 +29,7 @@ module.exports = {
         const { embedColor } = profileData;;
 
         let transferDash = new EmbedBuilder()
-            .setTitle('Transfer Coins')
+            .setTitle('Transfer Coins 💵')
             .setColor(embedColor)
             .setFooter({text: `As of ${ currentDateTime }`});
 

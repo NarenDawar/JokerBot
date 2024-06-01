@@ -21,7 +21,6 @@ module.exports = {
         const { id } = interaction.user;
         const { coins } = profileData;
         const { embedColor } = profileData;
-        
         const rpsDash = new EmbedBuilder()
             .setTitle('Rock, Paper, Scissors')
             .setColor(embedColor)
@@ -29,36 +28,37 @@ module.exports = {
 
         const rockButton = new ButtonBuilder()
 			.setCustomId('Rock')
-			.setLabel('Rock')
+			.setLabel('Rock 🪨')
 			.setStyle(ButtonStyle.Primary);
 
 		const paperButton = new ButtonBuilder()
 			.setCustomId('Paper')
-			.setLabel('Paper')
+			.setLabel('Paper 📰')
 			.setStyle(ButtonStyle.Primary);
 
         const scissorsButton = new ButtonBuilder()
 			.setCustomId('Scissors')
-			.setLabel('Scissors')
+			.setLabel('Scissors ✂️')
 			.setStyle(ButtonStyle.Primary);
 
          const row = new ActionRowBuilder()
 			.addComponents(rockButton, paperButton, scissorsButton);
 
-            await interaction.editReply({
-                components: [row],
-                embeds: [rpsDash],
-            });
 
         if (coins < betAmt) {
-            coinDash.setDescription(`You do not have **${betAmt}** coins.`);
+            rpsDash.setDescription(`You do not have **${betAmt}** coins.`);
             return await interaction.editReply({ embeds : [rpsDash]});
         }
           
         if(!(betAmt >= minBet) || !(betAmt <= maxBet)) {
-            coinDash.setDescription(`Invalid amount. Minimum bet amount is **${ minBet }** and maximum bet amount is **${ maxBet }**`);
+            rpsDash.setDescription(`Invalid amount. Minimum bet amount is **${ minBet }** and maximum bet amount is **${ maxBet }**`);
             return await interaction.editReply({ embeds : [rpsDash]});
         }
+
+        await interaction.editReply({
+            components: [row],
+            embeds: [rpsDash],
+        });
 
         const message = await interaction.fetchReply();
 

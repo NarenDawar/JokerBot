@@ -9,7 +9,7 @@ module.exports = {
     async execute(interaction, profileData) {
         const {embedColor} = profileData;
         let informationBoard = new EmbedBuilder()
-            .setTitle("Information About The Store")
+            .setTitle("Information About The Shop 🛒")
             .setDescription("The shop is where you can purchase various items. This is still in development.")
             .setColor(embedColor)
             .addFields({

@@ -22,7 +22,7 @@ module.exports = {
         const {embedColor} = profileData;
 
         const coinDash = new EmbedBuilder()
-            .setTitle('Coinflip')
+            .setTitle('Coinflip 🪙')
             .setColor(embedColor)
             .setDescription("Heads or Tails?")
             .setFooter({text: `You have bet ${betAmt} coins.`});
@@ -40,10 +40,6 @@ module.exports = {
             const row = new ActionRowBuilder()
 			.addComponents(headsButton, tailsButton);
 
-            await interaction.editReply({
-                components: [row],
-                embeds: [coinDash]
-            });
 
         if (coins < betAmt) {
             coinDash.setDescription(`You do not have ${betAmt} coins.`);
@@ -54,6 +50,12 @@ module.exports = {
             coinDash.setDescription(`Invalid amount. Minimum bet amount is ${minBet} and maximum bet amount is ${maxBet}`);
             return await interaction.editReply({ embeds : [coinDash]});
         }
+
+        await interaction.editReply({
+            components: [row],
+            embeds: [coinDash]
+        });
+        
         const message = await interaction.fetchReply();
 
         const filter = (i) => i.user.id === interaction.user.id && (i.customId === 'Heads' || i.customId === 'Tails');

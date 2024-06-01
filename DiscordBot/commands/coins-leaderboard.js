@@ -13,9 +13,10 @@ module.exports = {
         const { embedColor } = profileData;
 
         let leaderboardEmbed = new EmbedBuilder()
-            .setTitle("Top 10 Coin Earners")
+            .setTitle("Top 10 Coin Earners 🤑")
             .setColor(embedColor)
-            .setFooter({ text: "You are not ranked yet."});
+            .setFooter({ text: "You are not ranked yet."})
+            .setTimestamp();
 
         const members = await profileModel
             .find()

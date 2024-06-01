@@ -10,14 +10,11 @@ module.exports = {
         const {embedColor} = profileData;
         const username = interaction.user.username;
 
-        const now = new Date();
-        const currentDateTime = now.toLocaleString();
-
         let balanceDash = new EmbedBuilder()
-            .setTitle('Current Balance')
+            .setTitle('Current Balance 💰')
             .setColor(embedColor)
             .setDescription(`**${username}** has **${coins}** coins!`)
-            .setFooter({text: `As of ${ currentDateTime }`});
+            .setTimestamp();
         await interaction.reply({ embeds : [balanceDash]});
     },
 }

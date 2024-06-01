@@ -16,7 +16,7 @@ module.exports = {
         const currentDateTime = now.toLocaleString();
 
         let workDash = new EmbedBuilder()
-        .setTitle('Hourly Wage')
+        .setTitle('Hourly Wage 👷')
         .setColor(embedColor)
 
         const cooldown = 3600000;

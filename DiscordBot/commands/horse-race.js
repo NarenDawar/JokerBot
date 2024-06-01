@@ -38,7 +38,7 @@ module.exports = {
         }
 
         const horseDash = new EmbedBuilder()
-            .setTitle('Horse Race')
+            .setTitle('Horse Race 🏇')
             .setColor(embedColor)
             .setDescription(
                 `Pick a horse to bet on.\n**${horses[0].name}** has a winning probability of **${Math.round(horses[0].probability*100)}%**\n` +
@@ -48,26 +48,22 @@ module.exports = {
 
         const thunderButton = new ButtonBuilder()
 			.setCustomId('Thunder')
-			.setLabel('Thunder')
+			.setLabel('Thunder 🐴')
 			.setStyle(ButtonStyle.Primary);
 
 		const blazeButton = new ButtonBuilder()
 			.setCustomId('Blaze')
-			.setLabel('Blaze')
+			.setLabel('Blaze 🐴')
 			.setStyle(ButtonStyle.Primary);
 
         const swiftButton = new ButtonBuilder()
 			.setCustomId('Swift')
-			.setLabel('Swift')
+			.setLabel('Swift 🐴')
 			.setStyle(ButtonStyle.Primary);
 
         const row = new ActionRowBuilder()
 			.addComponents(thunderButton, blazeButton, swiftButton);
 
-            await interaction.editReply({
-                components: [row],
-                embeds: [horseDash]
-            });
 
         if (coins < betAmt) {
             horseDash.setDescription(`You do not have ${betAmt} coins.`);
@@ -78,6 +74,12 @@ module.exports = {
             horseDash.setDescription(`Invalid amount. Minimum bet amount is ${minBet} and maximum bet amount is ${maxBet}`);
             return await interaction.editReply({ embeds : [horseDash]});
         }
+
+        await interaction.editReply({
+            components: [row],
+            embeds: [horseDash]
+        });
+
         const message = await interaction.fetchReply();
 
         const filter = (i) => i.user.id === interaction.user.id && (i.customId === 'Blaze' || i.customId === 'Swift' || i.customId === 'Thunder');
