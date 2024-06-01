@@ -14,7 +14,7 @@ module.exports = {
             .setColor(embedColor)
             .addFields({
                 name: 'Games',
-                value: '**coinflip**: Bet on head/tails.\n**rock-paper-scissors**: Bet on a game of rps against a computer.\n**blackjack**: Classic game of blackjack.\n**roulette (colors and numbers)**: Can pick to bet on colors or numbers. Numbers has 5x initial bet payout if you win.\n**horse-race**: Three horses are generated with 3 different probabilities of winning. Select one to win. Probabilities change on every new occurrence.\n**slots**: Classic slots game. Pays 2x initial.\n**trivia**: Bet on a classic trivia question! Test your smarts!',
+                value: '**coinflip**: Bet on head/tails.\n**rock-paper-scissors**: Bet on a game of rps against a computer.\n**blackjack**: Classic game of blackjack.\n**roulette (colors and numbers)**: Can pick to bet on colors or numbers. Numbers has 5x initial bet payout if you win.\n**horse-race**: Three horses are generated with 3 different probabilities of winning. Select one to win. Probabilities change on every new occurrence.\n**slots**: Classic slots game. Pays 2x initial bet.\n**trivia**: Bet on a classic trivia question! Test your smarts!\n**hangman**: Classic game of hangman.',
                 inline: true,
             },
             {

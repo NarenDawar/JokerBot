@@ -12,12 +12,11 @@ module.exports = {
         const {id} = interaction.user;
         const randomNumber = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
 
-        const now = new Date();
-        const currentDateTime = now.toLocaleString();
 
         let workDash = new EmbedBuilder()
         .setTitle('Hourly Wage 👷')
         .setColor(embedColor)
+        .setTimestamp();
 
         const cooldown = 3600000;
         const timeLeft = cooldown - (Date.now() - workLastUsed);
@@ -26,7 +25,6 @@ module.exports = {
             const { hours, minutes, seconds } = parseMilliseconds(timeLeft);
 
             workDash.setDescription(`Your next shift starts in **${hours} hrs ${minutes} min ${seconds} sec**`);
-            workDash.setFooter({text: `As of ${ currentDateTime }`});
             return await interaction.reply({ embeds : [workDash]});
         }
 
