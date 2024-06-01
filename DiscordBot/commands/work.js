@@ -41,7 +41,6 @@ module.exports = {
         );
 
         workDash.setDescription(`Congratulations! Your work just earned you **${randomNumber}** coins!`);
-        workDash.setFooter({text: `As of ${ currentDateTime }`});
         return await interaction.reply({ embeds : [workDash]});
     },
 }

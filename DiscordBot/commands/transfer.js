@@ -22,8 +22,6 @@ module.exports = {
         const recievingUser = interaction.options.getUser("user");
         const donationAmt = interaction.options.getInteger("amount");
 
-        const now = new Date();
-        const currentDateTime = now.toLocaleString();
 
         const { coins } = profileData;
         const { embedColor } = profileData;;
@@ -31,7 +29,7 @@ module.exports = {
         let transferDash = new EmbedBuilder()
             .setTitle('Transfer Coins 💵')
             .setColor(embedColor)
-            .setFooter({text: `As of ${ currentDateTime }`});
+            .setTimestamp();
 
         if (coins < donationAmt) {
             await interaction.deferReply({ ephemeral: true});
