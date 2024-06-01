@@ -45,7 +45,6 @@ module.exports = {
                   description: "You have one minute to guess the answer."
                 },
                 hangman: { hat: '🎩', head: '😟', shirt: '👕', pants: '🩳', boots: '👞👞' },
-                customWord: 'Gamecord',
                 timeoutTime: 60000,
                 theme: 'nature',
                 winMessage: `You won ${betAmt} coins! The word was **{word}**.`,
