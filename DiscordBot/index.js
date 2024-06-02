@@ -53,8 +53,7 @@ mongoose.connect(database, {
 		console.log("Connected to database");
 	}).catch((err) => {
 		console.log(err);
-	})
-	;
+	});
 
 const profileModel = require("./models/profileSchema");
 
@@ -95,7 +94,7 @@ client.on('interactionCreate', async interaction => {
 		if(!user) {
 			return interaction.reply({content: 'You are not yet registered. Try playing a game first.'});
 		} else {
-			const claimCoins = Math.floor(Math.random() * (1000 - 100 + 1)) + 1000;
+			const claimCoins = Math.floor(Math.random() * (1000 - 100 + 1));
 			await profileModel.findOneAndUpdate({ userId}, {$inc : {coins: claimCoins}});
 
 			const row = new ActionRowBuilder()

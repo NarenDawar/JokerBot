@@ -1,6 +1,16 @@
 {
     "embedColorPrice" : 1000,
     "customTitlePrice" : 10000,
-    "customPhrasePrice" : 50000
+    "customPhrasePrice" : 50000,
+    "minerPrice": 1000,
+    "professorPrice": 7000,
+    "engineerPrice": 10000,
+    "scientistPrice": 30000,
+    "rEAPrice": 80000,
+    "managerPrice": 150000,
+    "CEOPrice": 500000,
+    "marsAgentPrice": 1000000,
+    "celebrityPrice": 5000000,
+    "multiDSPrice": 100000000
 
 }

@@ -32,7 +32,7 @@ module.exports = {
             return await interaction.editReply({ embeds : [blackjackEmbed] });
         }
 
-        let compStartHand = Math.floor(Math.random() * 21) + 1;
+        const compStartHand = Math.floor(Math.random() * 11) + 16;
         let userStartHand = Math.floor(Math.random() * 21) + 1;
 
         const hitButton = new ButtonBuilder()
@@ -93,10 +93,7 @@ module.exports = {
                 });
 
             }else if(i.customId === 'Stay') {
-                let compHandValue = compStartHand;
-                if (compStartHand <= 16) {
-                    compHandValue = compStartHand + (Math.floor(Math.random() * 10) + 1);
-                }
+                const compHandValue = compStartHand;
 
                 // Determine winner based on hand values
                 if (userStartHand > compHandValue || compHandValue > 21) {

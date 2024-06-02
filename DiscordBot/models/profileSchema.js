@@ -10,6 +10,7 @@ const profileSchema = new mongoose.Schema({
     customTitle: {type: String, default: "N/A"},
     customPhrase: {type: String, default: "N/A"},
     numOfWins: {type: Number, default: 0},
+    jobTitle: {type: String, default: "Construction"},
 });
 
 const model = mongoose.model("jokerdb", profileSchema);

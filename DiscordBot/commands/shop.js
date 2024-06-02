@@ -1,6 +1,9 @@
 const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const profileModel = require("../models/profileSchema");
-const { embedColorPrice, customTitlePrice, customPhrasePrice} = require("../shopPrices.json");
+const { embedColorPrice, customTitlePrice, customPhrasePrice, 
+    minerPrice, professorPrice, engineerPrice, scientistPrice, 
+    rEAPrice, managerPrice, CEOPrice, marsAgentPrice, 
+    celebrityPrice, multiDSPrice} = require("../shopPrices.json");
 
 
 module.exports = {
@@ -86,6 +89,29 @@ module.exports = {
                             { name: "My only skill is blackjack.", value: "Wild Card WarriorMy only skill is blackjack." },
                             { name: "It was never luck.", value: "It was never luck." },
                             { name: "I was born for this.", value: "I was born for this." }
+                        )
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand((subcommand) =>
+            subcommand
+                .setName("job")
+                .setDescription(`Upgrade your job. Prices vary! This affects your /work payments.`)
+                .addStringOption((option) => 
+                    option
+                        .setName("job-title")
+                        .setDescription("Choose the desired phrase.")
+                        .addChoices(
+                            { name: "Miner", value: "Miner" },
+                            { name: "Professor", value: "Professor" },
+                            { name: "Engineer", value: "Engineer" },
+                            { name: "Scientist", value: "Scientist" },
+                            { name: "Real Estate Agent", value: "Real Estate Agent" },
+                            { name: "Manager", value: "Manager" },
+                            { name: "CEO", value: "CEO" },
+                            { name: "Mars Agent", value: "Mars Agent" },
+                            { name: "Celebrity", value: "Celebrity" },
+                            { name: "Multi-Dimensional Spy", value: "Multi-Dimensional Spy" },
                         )
                         .setRequired(true)
                 )
@@ -193,5 +219,340 @@ module.exports = {
             shopEmbed.setDescription(`You have successfully changed your phrase to: **${phrasePicked}**`);
             return interaction.editReply({ embeds : [shopEmbed]});
         }
+
+        else if (shopCommand === "job") {
+            const jobPicked = interaction.options.getString("job-title");
+
+            if(jobPicked === "Miner") {
+                if (coins < minerPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${minerPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -minerPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "Professor") {
+                if (coins < professorPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${professorPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -professorPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "Engineer") {
+                if (coins < engineerPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${engineerPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -engineerPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "Scientist") {
+                if (coins < scientistPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${scientistPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -scientistPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "Real Estate Agent") {
+                if (coins < rEAPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${rEAPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -rEAPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "Manager") {
+                if (coins < managerPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${managerPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -managerPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "CEO") {
+                if (coins < CEOPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${CEOPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -CEOPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "CEO") {
+                if (coins < CEOPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${CEOPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -CEOPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "Mars Agent") {
+                if (coins < marsAgentPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${marsAgentPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -marsAgentPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "Celebrity") {
+                if (coins < celebrityPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${celebrityPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -celebrityPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+
+            else if(jobPicked === "Multi-Dimensional Spy") {
+                if (coins < multiDSPrice) {
+                    await interaction.deferReply();
+                    shopEmbed.setDescription(`You need ${multiDSPrice} coins to get this job.`);
+                    return await interaction.editReply(
+                        {
+                            embeds : [shopEmbed]
+                        }
+                    );
+                }
+    
+                await interaction.deferReply();
+    
+                await profileModel.findOneAndUpdate(
+                    {
+                        userId,
+                    },
+                    {
+                        $inc: {
+                            coins: -multiDSPrice,
+                        },
+                        $set: {
+                            jobTitle: jobPicked,
+                        }
+                    }
+                );
+                shopEmbed.setDescription(`You have successfully changed your job to: **${jobPicked}**`);
+                return interaction.editReply({ embeds : [shopEmbed]});
+            }
+        }
+
     },
 }

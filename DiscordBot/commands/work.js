@@ -7,24 +7,37 @@ module.exports = {
         .setName("work")
         .setDescription("Gives you a random amount of coins (50-100) for your hard (or not) work!"),
     async execute(interaction, profileData) {
-        const {coins, embedColor} = profileData;
+        const {embedColor, jobTitle} = profileData;
         const { workLastUsed } = profileData;
         const {id} = interaction.user;
-        const randomNumber = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
-
 
         let workDash = new EmbedBuilder()
         .setTitle('Hourly Wage 👷')
         .setColor(embedColor)
         .setTimestamp();
 
-        const cooldown = 3600000;
+        const cooldown = 600000;
         const timeLeft = cooldown - (Date.now() - workLastUsed);
 
-        if (timeLeft > 0) {
-            const { hours, minutes, seconds } = parseMilliseconds(timeLeft);
+        const jobMap = new Map();
+        jobMap.set('Construction', 1);
+        jobMap.set('Miner', 1.5);
+        jobMap.set('Professor', 2);
+        jobMap.set('Engineer', 2.5);
+        jobMap.set('Scientist', 3);
+        jobMap.set('Real Estate Agent', 5);
+        jobMap.set('Manager', 7);
+        jobMap.set('CEO', 9);
+        jobMap.set('Mars Agent', 11);
+        jobMap.set('Celebrity', 15);
+        jobMap.set('Multi-Dimensional Spy', 20);
 
-            workDash.setDescription(`Your next shift starts in **${hours} hrs ${minutes} min ${seconds} sec**`);
+        const randomNumber = Math.floor((Math.floor(Math.random() * (100 - 50 + 1)) + 50)*jobMap.get(jobTitle));
+
+        if (timeLeft > 0) {
+            const { minutes, seconds } = parseMilliseconds(timeLeft);
+
+            workDash.setDescription(`Your next shift starts in **${minutes} mins ${seconds} secs**`);
             return await interaction.reply({ embeds : [workDash]});
         }
 
