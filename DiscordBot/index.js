@@ -30,6 +30,14 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
+const { AutoPoster } = require('topgg-autoposter')
+const poster = AutoPoster('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMzg3MTE5MzE1NzQxNjE0MzgiLCJib3QiOnRydWUsImlhdCI6MTcxNzM3ODc3NX0.POWc9AEbM16IYNW4wF375VEVdDYgiKnc6ESs3bFYMe4', client) // your discord.js or eris client
+
+// optional
+poster.on('posted', (stats) => { // ran when succesfully posted
+  console.log(`Posted stats to Top.gg | ${stats.serverCount} servers`)
+})
 // Command Handling Below
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');

@@ -12,9 +12,11 @@
     "discord-gamecord": "^4.4.2",
     "discord.js": "^14.15.2",
     "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "parse-ms-2": "^1.0.0",
     "sequelize": "^6.37.3",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "topgg-autoposter": "^2.0.2"
   },
   "devDependencies": {
     "eslint": "^9.2.0",

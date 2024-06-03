@@ -42,8 +42,8 @@ module.exports = {
             `**Wins**: ${recievingUserData.numOfWins}\n\n` +
             `**Title**: ${recievingUserData.customTitle}\n\n` +
             `**Phrase**: ${recievingUserData.customPhrase}\n\n` +
-            `**Selected Embed Color**: ${recievingUserData.embedColor}\n` +
-            `**Job**: ${recievingUser.jobTitle}`
+            `**Selected Embed Color**: ${recievingUserData.embedColor}\n\n` +
+            `**Job**: ${recievingUserData.jobTitle}`
         );
 
         interaction.editReply({ embeds : [userDash]});
