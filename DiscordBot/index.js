@@ -90,7 +90,7 @@ client.on('messageCreate', async message => {
 				.setStyle(ButtonStyle.Primary)
 		);
 
-		message.channel.send( {embeds : [embeder], components: [row]});
+		message.channel.send( {embeds : [embeder], components: [row]}).catch(() => {message.author.send("This bot is missing certain permissions to claim surprise drops.");});
 		messageCount = new Map();
 	}
 });
@@ -98,10 +98,7 @@ client.on('messageCreate', async message => {
 client.on('interactionCreate', async interaction => {
 	if(interaction.customId === 'claim') {
 		const userId = interaction.user.id;
-		const user = await profileModel.findOne({ userId });
-		if(!user) {
-			return interaction.reply({content: 'You are not yet registered. Try playing a game first.'});
-		} else {
+		
 			const claimCoins = Math.floor(Math.random() * (1000 - 100 + 1));
 			await profileModel.findOneAndUpdate({ userId}, {$inc : {coins: claimCoins}});
 
@@ -114,8 +111,7 @@ client.on('interactionCreate', async interaction => {
 						.setStyle(ButtonStyle.Primary)
 						.setDisabled(true)
 				);
-			await interaction.update({ content: `Claim Successful! **${claimCoins}** coins have been added to your balance.`, components: [row]});
-		}
+			await interaction.update({ content: `Claim Successful! **${claimCoins}** coins have been added to your balance.`, components: [row]})
 	}
 })
 

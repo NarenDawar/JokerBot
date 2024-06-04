@@ -15,7 +15,7 @@ module.exports = {
         await interaction.deferReply();
 
         const amount = interaction.options.getInteger('amount');
-        const { coins } = profileData;
+        const coins = parseInt(profileData.coins); // Convert coins to an integer
         const { embedColor } = profileData;
         const userId = interaction.user.id;
 
@@ -34,14 +34,22 @@ module.exports = {
             return await interaction.editReply({ embeds: [machineDash] });
         }
 
-        // Generate a random multiplier between 1 and 2.5
-        const multiplier = Math.random() * 1.5 + 1;
+        // Generate a random number to determine the outcome
+        const outcomeRandom = Math.random();
 
-        // Generate a random crash point between 1.2 and 4
-        const crashPoint = Math.random() * 2.8 + 1.2;
+        let multiplier;
+        let outcome;
+        // Determine the outcome based on the random number
+        if (outcomeRandom <= 0.4) { // 40% chance of winning
+            multiplier = Math.random() * 0.4 + 1.1; // Multiplier between 1.1 and 1.5
+            outcome = 'win';
+        } else { // 60% chance of losing
+            multiplier = Math.random() * 0.4 + 1.5; // Multiplier between 1.5 and 1.9
+            outcome = 'lose';
+        }
 
-        // Determine outcome of the bet
-        const outcome = multiplier >= crashPoint ? 'win' : 'lose';
+        // Generate a random crash point between 1.1 and 4
+        const crashPoint = Math.random() * 2.9 + 1.1;
 
         // Calculate new balance based on the outcome
         let newCoins;
