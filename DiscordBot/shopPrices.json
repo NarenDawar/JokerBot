@@ -1,7 +1,7 @@
 {
-    "embedColorPrice" : 1000,
-    "customTitlePrice" : 10000,
-    "customPhrasePrice" : 50000,
+    "embedColorPrice" : 5000,
+    "customTitlePrice" : 40000,
+    "customPhrasePrice" : 60000,
     "minerPrice": 1000,
     "professorPrice": 7000,
     "engineerPrice": 10000,

@@ -15,7 +15,8 @@ module.exports = {
             .addFields({
                 name: 'Games',
                 value: '**coinflip**: Bet on head/tails.\n**rock-paper-scissors**: Bet on a game of rps against a computer.\n**blackjack**: Classic game of blackjack.\n**roulette (colors and numbers)**: Can pick to bet on colors or numbers. Numbers has 5x initial bet payout if you win.\n**horse-race**: Three horses are generated with 3 different probabilities of winning. Select one to win. Probabilities change on every new occurrence.\n**slots**: Classic slots game.'
-                + 'Pays 2x initial bet.\n**trivia**: Bet on a classic trivia question! Test your smarts!\n**hangman**: Classic game of hangman.\n**crash**: Insert bet amount and win/lose on a randomly generated multiplier!',
+                + 'Pays 2x initial bet.\n**trivia**: Bet on a classic trivia question! Test your smarts!\n**hangman**: Classic game of hangman.\n**crash**: Insert bet amount and win/lose on a randomly generated multiplier!' + 
+                '\n**minesweeper**: Bet on a normal game of minesweeper!',
                 inline: true,
             },
             {
@@ -24,7 +25,7 @@ module.exports = {
                 '\n**leaderboard**: Check local leaderboard (coin-based ranking).\n**transfer**: Transfer money to someone else.\n**work**: Work for some money.' + 
                 'Available once every ten minutes.\n**shop**: Buy some cool add-ons. Shop in development.\n**shop-info**: Checks what is in the shop.\n' +
                 `**invite**: Generate an invite link to invite the bot to a server.\n**support**: Generates link to support server.` + 
-                `**bank (deposit, withdraw, or view balance)**: Store money and gain interest on money that sits in the bank.`,
+                `**bank (deposit, withdraw, or view balance)**: Store money and gain interest on money that sits in the bank.\n**tell-a-joke**: Get a random joke!\n**redeem-workers**: Redeem your workers hard earned money! Can acquire them from the shop.`,
                 inline: true,
             },
             {

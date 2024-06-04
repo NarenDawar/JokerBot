@@ -1,12 +1,12 @@
-const { Hangman } = require('discord-gamecord');
+const { Minesweeper  } = require('discord-gamecord');
 const {SlashCommandBuilder, EmbedBuilder,ActionRowBuilder, ButtonBuilder, ButtonStyle} = require("discord.js");
 const { minBet, maxBet } = require("../globalValues.json");
 const profileModel = require("../models/profileSchema");
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('hangman')
-    .setDescription('Bet on a hangman game!')
+    .setName('minesweeper')
+    .setDescription('Bet on a minesweeper game!')
     .addIntegerOption((option) => 
         option
             .setName("amount")
@@ -21,35 +21,36 @@ module.exports = {
         const betAmt = interaction.options.getInteger('amount');
         const { coins, embedColor } = profileData;
 
-        const hangDash = new EmbedBuilder()
-            .setTitle("Trivia ❓")
+        const mineDash = new EmbedBuilder()
+            .setTitle("MineSweeper 💣")
             .setTimestamp()
             .setColor(embedColor);
 
         if(!(betAmt >= minBet) || !(betAmt <= maxBet)) {
-            hangDash.setDescription(`Invalid amount. Minimum bet amount is **${ minBet }** and maximum bet amount is **${ maxBet }**`);
-            return await interaction.editReply({ embeds : [hangDash]});
+            mineDash.setDescription(`Invalid amount. Minimum bet amount is **${ minBet }** and maximum bet amount is **${ maxBet }**`);
+            return await interaction.editReply({ embeds : [mineDash]});
         }
 
         if (coins < betAmt) {
-            hangDash.setDescription(`You do not have **${betAmt}** coins.`);
-            return await interaction.editReply({ embeds : [hangDash]});
+            mineDash.setDescription(`You do not have **${betAmt}** coins.`);
+            return await interaction.editReply({ embeds : [mineDash]});
         }
 
-            const Game = new Hangman({
-                message: interaction,
-                isSlashGame: false,
-                embed: {
-                  title: 'Hangman',
-                  color: embedColor.toString(),
-                  description: "You have one minute to guess the answer."
-                },
-                hangman: { hat: '🎩', head: '😟', shirt: '👕', pants: '🩳', boots: '👞👞' },
-                timeoutTime: 60000,
-                winMessage: `You won ${betAmt} coins! The word was **{word}**.`,
-                loseMessage: `You lost ${betAmt} coins! The word was **{word}**.`,
-                playerOnlyMessage: 'Only {player} can use these buttons.'
-              });
+        const Game = new Minesweeper({
+            message: interaction,
+            isSlashGame: false,
+            embed: {
+              title: 'Minesweeper',
+              color: embedColor.toString(),
+              description: 'Click on the buttons to reveal the blocks except mines.'
+            },
+            emojis: { flag: '🚩', mine: '💣' },
+            mines: 5,
+            timeoutTime: 60000,
+            winMessage: `You won the Game! You successfully avoided all the mines. You won ${betAmt} coins`,
+            loseMessage: `You lost the Game! Beaware of the mines next time. You lost ${betAmt}`,
+            playerOnlyMessage: 'Only {player} can use these buttons.'
+          });
 
             Game.startGame();
             Game.on('gameOver', async result => {

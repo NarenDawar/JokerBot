@@ -1,5 +1,9 @@
 const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const profileModel = require("../models/profileSchema");
+const { embedColorPrice, customTitlePrice, customPhrasePrice, 
+    minerPrice, professorPrice, engineerPrice, scientistPrice, 
+    rEAPrice, managerPrice, CEOPrice, marsAgentPrice, 
+    celebrityPrice, multiDSPrice, workerPrice} = require("../shopPrices.json");
 
 
 module.exports = {
@@ -14,14 +18,14 @@ module.exports = {
             .setColor(embedColor)
             .addFields({
                 name: 'Items:',
-                value: '**embedColor**: Change your embed color for all functions.\n' +
-                `**customTitle**: Change your profile associated title.\n` +
-                `**customPhrase**: Change your profile associated phrase.\n` +
-                `**jobTitle**: Upgrade your job and make more from /work. Here are the multipliers:\n` +
-                `Construction (default): **1x**\nMiner: **1.5x**\nProfessor: **2x**\nEngineer: **2.5x**\n` +
-                `Scientist: **3x**\nReal Estate Agent: **5x**\nManager: **7x**\nCEO: **9x**\n` +
-                `Mars Agent: **11x**\nCelebrity: **15x**\nMulti-Dimensional Spy: **20x**\n` +
-                `**All of these purchases show up on user-info.**`,
+                value: `**embedColor**: Change your embed color for all functions. (Price: ${embedColorPrice})\n` +
+                `**customTitle**: Change your profile associated title. (Price: ${customTitlePrice})\n` +
+                `**customPhrase**: Change your profile associated phrase. (Price: ${customPhrasePrice})\n` +
+                `**jobTitle**: Upgrade your job and make more from /work. Here are the multipliers and prices:\n` +
+                `Construction (default): **1x**\nMiner: **1.5x** (Price: ${minerPrice})\nProfessor: **2x** (Price: ${professorPrice})\nEngineer: **2.5x** (Price: ${engineerPrice})\n` +
+                `Scientist: **3x** (Price: ${scientistPrice})\nReal Estate Agent: **5x** (Price: ${rEAPrice})\nManager: **7x** (Price: ${managerPrice})\nCEO: **9x** (Price: ${CEOPrice})\n` +
+                `Mars Agent: **11x** (Price: ${marsAgentPrice})\nCelebrity: **15x** (Price: ${celebrityPrice})\nMulti-Dimensional Spy: **20x** (Price: ${multiDSPrice})\n` +
+                `**workers**: Purchase workers that work for you and gain coins over time. (Price: ${workerPrice})\n**All of these purchases show up on user-info. Prices listed.**`,
                 inline: false,
             });
 

@@ -4,7 +4,7 @@ const profileModel = require('../models/profileSchema');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("balance")
+        .setName("redeem-workers")
         .setDescription("Returns your balance (number of coins!)"),
     async execute(interaction, profileData) {
         await interaction.deferReply();
