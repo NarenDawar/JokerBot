@@ -3,7 +3,7 @@ const profileModel = require("../models/profileSchema");
 const { embedColorPrice, customTitlePrice, customPhrasePrice, 
     minerPrice, professorPrice, engineerPrice, scientistPrice, 
     rEAPrice, managerPrice, CEOPrice, marsAgentPrice, 
-    celebrityPrice, multiDSPrice} = require("../shopPrices.json");
+    celebrityPrice, multiDSPrice, mysteryBoxPrice} = require("../shopPrices.json");
 
 
 module.exports = {
@@ -123,7 +123,8 @@ module.exports = {
 
         let shopEmbed = new EmbedBuilder()
             .setTitle("Shop")
-            .setColor(embedColor);
+            .setColor(embedColor)
+            .setTimestamp();
 
         if (shopCommand === "embed-color") {
             const colorPicked = interaction.options.getString("color");
@@ -553,6 +554,7 @@ module.exports = {
                 return interaction.editReply({ embeds : [shopEmbed]});
             }
         }
+
 
     },
 }
