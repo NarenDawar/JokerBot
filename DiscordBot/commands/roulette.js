@@ -110,8 +110,8 @@ module.exports = {
                         rouletteDash.setDescription(`You **missed**!`)
                         rouletteDash.setFooter({text: `You have lost ${betAmt} coins.`});
                     }
-                    await interaction.editReply({ embeds : [rouletteDash] , components: [], files: [] });
                     collector2.stop();
+                    return await interaction.editReply({ embeds : [rouletteDash] , components: [], files: [] });
                 });
 
                 collector2.on('end', (collected, reason) => {
@@ -150,8 +150,8 @@ module.exports = {
                         rouletteDash.setDescription(`You **missed**!`);
                         rouletteDash.setFooter({text: `You have lost ${betAmt} coins.`});
                     }
-                    await interaction.editReply({ embeds: [rouletteDash], components: [], files: [] });
                     collector2.stop();
+                    return await interaction.editReply({ embeds: [rouletteDash], components: [], files: [] });
                 });
 
                 collector2.on('end', (collected, reason) => {
@@ -161,6 +161,7 @@ module.exports = {
                         interaction.channel.send({ embeds: [rouletteDash], components: [], files: [] });
                     }
                 });
+                collector.stop();
             }
         })
         collector.on('end', (collected, reason) => {

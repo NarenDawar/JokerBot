@@ -3,7 +3,7 @@ const { default: axios } = require('axios');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("tell-aa-joke")
+        .setName("tell-a-joke")
         .setDescription("Get a randomly generated joke!"),
     async execute(interaction, profileData) {
         await interaction.deferReply();

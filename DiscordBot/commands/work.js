@@ -53,7 +53,7 @@ module.exports = {
             },
         );
 
-        workDash.setDescription(`Congratulations! Your work just earned you **${randomNumber}** coins!`);
+        workDash.setDescription(`Congratulations! As a ${jobTitle}, you earned **${randomNumber}** coins!`);
         return await interaction.reply({ embeds : [workDash]});
     },
 }

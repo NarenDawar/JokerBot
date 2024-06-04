@@ -3,7 +3,7 @@ const profileModel = require("../models/profileSchema");
 const { embedColorPrice, customTitlePrice, customPhrasePrice, 
     minerPrice, professorPrice, engineerPrice, scientistPrice, 
     rEAPrice, managerPrice, CEOPrice, marsAgentPrice, 
-    celebrityPrice, multiDSPrice, mysteryBoxPrice} = require("../shopPrices.json");
+    celebrityPrice, multiDSPrice, workerPrice} = require("../shopPrices.json");
 
 
 module.exports = {
@@ -12,23 +12,14 @@ module.exports = {
         .setDescription("Shop to spend your coins.")
         .addSubcommand((subcommand) =>
             subcommand
-                .setName("embed-color")
-                .setDescription(`Purchase a new embed color. Price : ${embedColorPrice} coins.`)
-                .addStringOption((option) => 
+                .setName("workers")
+                .setDescription(`Purchase a worker that generates money for you. Cost per worker: ${workerPrice}`)
+                .addIntegerOption((option) => 
                     option
-                        .setName("color")
-                        .setDescription("Choose the desired color of your embed.")
-                        .addChoices(
-                            { name: "Aqua", value: '#1abc9c' },
-                            { name: "Green", value: '#57f287' },
-                            { name: "Blue", value: '#3498db' },
-                            { name: "Purple", value: '#9b59b6' },
-                            { name: "Gold", value: '#f1c40f' },
-                            { name: "Orange", value: '#e67e22' },
-                            { name: "Yellow", value: '#ffff00' },
-
-                        )
+                        .setName("amount")
+                        .setDescription("Type the amount of workers you want.")
                         .setRequired(true)
+                        .setMinValue(1)
                 )
         )
         .addSubcommand((subcommand) =>
@@ -155,6 +146,36 @@ module.exports = {
                 }
             );
             shopEmbed.setDescription(`You have successfully changed your embed color to: **${colorPicked}**`)
+            return interaction.editReply({ embeds : [shopEmbed]});
+        }
+        if (shopCommand === "workers") {
+            const numPicked = interaction.options.getString("amount");
+
+            if (coins < workerPrice*numPicked) {
+                await interaction.deferReply();
+                shopEmbed.setDescription(`You need ${workerPrice*numPicked} coins to buy ${numPicked} workers.`);
+                return await interaction.editReply(
+                    {
+                        embeds : [shopEmbed]
+                    }
+                );
+            }
+
+            await interaction.deferReply();
+
+            await profileModel.findOneAndUpdate(
+                {
+                    userId,
+                },
+                {
+                    $inc: {
+                        coins: -workerPrice*numPicked,
+                        numOfWorkers: numPicked
+                    },
+                    
+                }
+            );
+            shopEmbed.setDescription(`You have purchased ${numPicked} workers.`)
             return interaction.editReply({ embeds : [shopEmbed]});
         }
         else if (shopCommand === "custom-title") {
