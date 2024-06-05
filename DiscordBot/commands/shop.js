@@ -149,7 +149,7 @@ module.exports = {
             return interaction.editReply({ embeds : [shopEmbed]});
         }
         if (shopCommand === "workers") {
-            const numPicked = interaction.options.getString("amount");
+            const numPicked = interaction.options.getInteger("amount");
 
             if (coins < workerPrice*numPicked) {
                 await interaction.deferReply();

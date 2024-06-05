@@ -10,7 +10,7 @@ const profileSchema = new mongoose.Schema({
     customTitle: {type: String, default: "N/A"},
     customPhrase: {type: String, default: "N/A"},
     numOfWins: {type: Number, default: 0},
-    jobTitle: {type: String, default: "Construction"},
+    jobTitle: {type: String, default: "Construction Worker"},
     bankBalance: {type: Number, default: 0},
     numOfWorkers: {type: Number, default: 0}
 });
