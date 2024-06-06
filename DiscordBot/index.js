@@ -78,7 +78,7 @@ client.on('messageCreate', async message => {
 			.setTitle("Surprise Drop")
 			.setDescription('Claim your coins!')
 			.setColor('Red')
-			.addFields({ name: 'Amount' , value: `${Math.floor(Math.random() * 1000 - 100 + 1)} coins`})
+			.addFields({ name: 'Amount' , value: `${Math.floor(Math.random() * 700 - 100 + 1)} coins`})
 			.setTimestamp();
 
 		const row = new ActionRowBuilder()
@@ -99,7 +99,7 @@ client.on('interactionCreate', async interaction => {
 	if(interaction.customId === 'claim') {
 		const userId = interaction.user.id;
 		
-			const claimCoins = Math.floor(Math.random() * (1000 - 100 + 1));
+			const claimCoins = Math.floor(Math.random() * (700 - 100 + 1));
 			await profileModel.findOneAndUpdate({ userId}, {$inc : {coins: claimCoins}});
 
 			const row = new ActionRowBuilder()

@@ -72,7 +72,7 @@ module.exports = {
             .addFields(
                 { name: 'Multiplier', value: `${multiplier.toFixed(2)}x`, inline: true },
                 { name: 'Crash Point', value: `${crashPoint.toFixed(2)}x`, inline: true },
-                { name: 'Outcome', value: outcome === 'win' ? 'You win!' : 'You lose!', inline: true },
+                { name: 'Outcome', value: outcome === 'win' ? 'You **win!**' : 'You **lose!**', inline: true },
                 { name: 'New Balance', value: `${newCoins} coins`, inline: true }
             )
             .setColor(outcome === 'win' ? 0x00FF00 : 0xFF0000)

@@ -18,11 +18,11 @@ module.exports = {
             .setTimestamp();
 
         function generateCoins() {
-            coins += 5*numOfWorkers; 
+            workerTotal += 5*numOfWorkers; 
         }
         setInterval(generateCoins, 60000);
 
-        workersDash.setDescription(`Your ${numOfWorkers} workers have earned: ${workerTotal} coins. Would you like to redeem them?`);
+        workerDash.setDescription(`Your ${numOfWorkers} workers have earned: **${workerTotal}** coins. Would you like to redeem them?`);
         const redeemButton = new ButtonBuilder()
 			.setCustomId('Redeem')
 			.setLabel('Redeem')
@@ -49,7 +49,7 @@ module.exports = {
         collector.on('collect', async (i) => { 
             if(i.customId === 'Wait') {
                 workerDash.setDescription(`Return back later to see how much more your workers have earned!`);
-                return await interactiom.editReply({ embeds: [workerDash]});
+                return await interaction.editReply({ embeds: [workerDash], components: []});
             }
 
             else if(i.customId === 'Redeem') {
@@ -59,10 +59,10 @@ module.exports = {
                 )
                 workerTotal = 0;
 
-                workerDash.setDescription(`You have redeemed ${workerTotal} coins! Thank your workers!`);
-                return await interactiom.editReply({ embeds: [workerDash]});
+                workerDash.setDescription(`You have redeemed **${workerTotal}** coins! Thank your workers!`);
+                return await interaction.editReply({ embeds: [workerDash], components: []});
             }
-
+            collector.stop();
         })
     },
 }

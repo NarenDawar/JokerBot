@@ -24,8 +24,9 @@ module.exports = {
                 value: '**balance**: Check your current balance.\n**daily**: Redeem daily reward.\n**user-info**: Check information of any user in the server (if registered).' + 
                 '\n**leaderboard**: Check local leaderboard (coin-based ranking).\n**transfer**: Transfer money to someone else.\n**work**: Work for some money.' + 
                 'Available once every ten minutes.\n**shop**: Buy some cool add-ons. Shop in development.\n**shop-info**: Checks what is in the shop.\n' +
-                `**invite**: Generate an invite link to invite the bot to a server.\n**support**: Generates link to support server.` + 
-                `**bank (deposit, withdraw, or view balance)**: Store money and gain interest on money that sits in the bank.\n**tell-a-joke**: Get a random joke!\n**redeem-workers**: Redeem your workers hard earned money! Can acquire them from the shop.`,
+                `**invite**: Generate an invite link to invite the bot to a server.\n**support**: Generates link to support server.\n` + 
+                `**bank (deposit, withdraw, or view balance)**: Store money and gain interest on money that sits in the bank.\n**tell-a-joke**: Get a random joke!\n**redeem-workers**: Redeem your workers hard earned money! Can acquire them from the shop.`
+                + `\n**vote**: Generates a link where you can upvote the bot on top.gg. This really helps with growing the bot!`,
                 inline: true,
             },
             {
@@ -43,6 +44,10 @@ module.exports = {
                 name: "Ensuring Functionality (IMPORTANT)",
                 value: "There are three things you need to ensure so that this bot works.:\n1. Go to Sever Settings -> Integrations -> JokerBot -> Ensure the @everyone is green.\n2. Ensure that all roles in your server have the following permission turned on: Use Application Commands\n" +
                 "3. Your bot has to be a higher role than other users for all functions to work properly."
+            },
+            {  
+                name:'Vote NOW!',
+                value: 'Vote for the bot on top.gg. This really helps me out!: https://top.gg/bot/1238711931574161438?s=05feecda02d9e',
             },
             {  
                 name:'Server',
