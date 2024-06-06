@@ -104,19 +104,5 @@ module.exports = {
             return interaction.editReply({ embeds : [bankDash]});
         }
     },
-    async applyInterest() {
-        const profiles = await profileModel.find();
 
-        for (const profile of profiles) {
-            await profileModel.findByIdAndUpdate(
-                profile._id,
-                { $mul: { bankBalance: 1.1 } }
-            );
-        }
-
-        console.log('Interest applied to all bank accounts.');
-
-        // Schedule the next interest application after 24 hours
-        setTimeout(this.applyInterest, 24 * 60 * 60 * 1000);
-    }
 }
