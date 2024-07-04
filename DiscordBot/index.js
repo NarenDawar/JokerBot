@@ -65,6 +65,23 @@ mongoose.connect(database, {
 
 const profileModel = require("./models/profileSchema");
 
+let workerEarnings = {};
+
+async function generateCoins() {
+    const profiles = await profileModel.find({});
+    profiles.forEach(profile => {
+        const { userId, numOfWorkers } = profile;
+        if (!workerEarnings[userId]) {
+            workerEarnings[userId] = 0;
+        }
+        workerEarnings[userId] += 5 * numOfWorkers;
+    });
+}
+
+setInterval(generateCoins, 60000);
+module.exports = { workerEarnings }
+
+
 let messageCount = new Map();
 
 client.on('messageCreate', async message => {
@@ -115,20 +132,5 @@ client.on('interactionCreate', async interaction => {
 	}
 })
 
-async function applyInterest() {
-	const profiles = await profileModel.find();
 
-	for (const profile of profiles) {
-		await profileModel.findByIdAndUpdate(
-			profile._id,
-			{ $mul: { bankBalance: 1.1 } }
-		);
-	}
-
-
-	// Schedule the next interest application after 24 hours
-	setTimeout(applyInterest, 24 * 60 * 60 * 1000);
-}
-
-applyInterest();
 client.login(token);

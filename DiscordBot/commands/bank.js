@@ -102,6 +102,7 @@ module.exports = {
         else if(subcommand === 'balance') {
             bankDash.setDescription(`You have ${bankBalance} coins!`);
             return interaction.editReply({ embeds : [bankDash]});
+
         }
     },
 

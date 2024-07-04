@@ -1,5 +1,6 @@
 const {SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 const profileModel = require('../models/profileSchema');
+const { workerEarnings } = require("..");
 
 
 module.exports = {
@@ -8,7 +9,6 @@ module.exports = {
         .setDescription("Returns your balance (number of coins!)"),
     async execute(interaction, profileData) {
         await interaction.deferReply();
-        let workerTotal = 0;
         const {coins, embedColor, numOfWorkers} = profileData;
         const userId = interaction.user.id;
 
@@ -17,12 +17,7 @@ module.exports = {
             .setColor(embedColor)
             .setTimestamp();
 
-        function generateCoins() {
-            workerTotal += 5*numOfWorkers; 
-        }
-        setInterval(generateCoins, 60000);
-
-        workerDash.setDescription(`Your ${numOfWorkers} workers have earned: **${workerTotal}** coins. Would you like to redeem them?`);
+        workerDash.setDescription(`Your ${numOfWorkers} workers have earned: **${workerEarnings[userId]}** coins. Would you like to redeem them?`);
         const redeemButton = new ButtonBuilder()
 			.setCustomId('Redeem')
 			.setLabel('Redeem')
@@ -55,11 +50,12 @@ module.exports = {
             else if(i.customId === 'Redeem') {
                 await profileModel.findOneAndUpdate (
                     { userId },
-                    { $inc: { coins: workerTotal } }
+                    { $inc: { coins: workerEarnings[userId] } }
                 )
-                workerTotal = 0;
 
-                workerDash.setDescription(`You have redeemed **${workerTotal}** coins! Thank your workers!`);
+
+                workerDash.setDescription(`You have redeemed **${workerEarnings[userId]}** coins! Thank your workers!`);
+                workerEarnings[userId] = 0;
                 return await interaction.editReply({ embeds: [workerDash], components: []});
             }
             collector.stop();
