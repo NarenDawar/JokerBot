@@ -10,6 +10,7 @@ module.exports = {
     async execute(interaction, profileData) {
         await interaction.deferReply();
         const {coins, embedColor, numOfWorkers} = profileData;
+        const workerTotal = workerEarnings[userId] || 0;
         const userId = interaction.user.id;
 
         let workerDash = new EmbedBuilder()
@@ -17,7 +18,7 @@ module.exports = {
             .setColor(embedColor)
             .setTimestamp();
 
-        workerDash.setDescription(`Your ${numOfWorkers} workers have earned: **${workerEarnings[userId]}** coins. Would you like to redeem them?`);
+        workerDash.setDescription(`Your ${numOfWorkers} workers have earned: **${workerTotal}** coins. Would you like to redeem them?`);
         const redeemButton = new ButtonBuilder()
 			.setCustomId('Redeem')
 			.setLabel('Redeem')
@@ -50,9 +51,8 @@ module.exports = {
             else if(i.customId === 'Redeem') {
                 await profileModel.findOneAndUpdate (
                     { userId },
-                    { $inc: { coins: workerEarnings[userId] } }
+                    { $inc: { coins: workerTotal } }
                 )
-
 
                 workerDash.setDescription(`You have redeemed **${workerEarnings[userId]}** coins! Thank your workers!`);
                 workerEarnings[userId] = 0;

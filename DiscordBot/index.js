@@ -65,22 +65,6 @@ mongoose.connect(database, {
 
 const profileModel = require("./models/profileSchema");
 
-let workerEarnings = {};
-
-async function generateCoins() {
-    const profiles = await profileModel.find({});
-    profiles.forEach(profile => {
-        const { userId, numOfWorkers } = profile;
-        if (!workerEarnings[userId]) {
-            workerEarnings[userId] = 0;
-        }
-        workerEarnings[userId] += 5 * numOfWorkers;
-    });
-}
-
-setInterval(generateCoins, 60000);
-module.exports = { workerEarnings }
-
 
 let messageCount = new Map();
 
