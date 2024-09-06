@@ -35,13 +35,8 @@ module.exports = {
 			.setLabel('Colors 🔴')
 			.setStyle(ButtonStyle.Primary);
 
-		const numbersButton = new ButtonBuilder()
-			.setCustomId('Numbers')
-			.setLabel('Numbers 🔢')
-			.setStyle(ButtonStyle.Primary);
-
         const row = new ActionRowBuilder()
-		.addComponents(colorsButton, numbersButton);
+		.addComponents(colorsButton);
 
 
         if (coins < betAmt) {
@@ -124,45 +119,7 @@ module.exports = {
                 collector.stop();
                 return;
                 ///
-            } else {
-                rouletteDash.setDescription(`Enter a number between 1 and 36 (inclusive)`);
-                const randomNumber = Math.floor(Math.random() * 36) + 1; // Random number between 1 and 36
-                await i.update({ embeds: [rouletteDash], components: [] });
-
-                const message2 = await i.fetchReply();
-                const filter = (f) => f.author.id === interaction.user.id; // Filter to check if the message is from the same user
-                const collector2 = message2.channel.createMessageCollector({ filter, time: 30000, max: 1 });
-
-                collector2.on('collect', async (f) => {
-                    const userNumber = parseInt(f.content); // Parse the content of the message as an integer
-                    if (userNumber === randomNumber) {
-                        await profileModel.findOneAndUpdate(
-                            { userId: id },
-                            { $inc: { coins: 5*betAmt, numOfWins: 1 } }
-                        );
-                        rouletteDash.setDescription(`You **hit**! Amazing Luck!`);
-                        rouletteDash.setFooter({text: `You have won ${5*betAmt} coins.`});
-                    } else {
-                        await profileModel.findOneAndUpdate(
-                            { userId: id },
-                            { $inc: { coins: -betAmt } }
-                        );
-                        rouletteDash.setDescription(`You **missed**!`);
-                        rouletteDash.setFooter({text: `You have lost ${betAmt} coins.`});
-                    }
-                    collector2.stop();
-                    return await interaction.editReply({ embeds: [rouletteDash], components: [], files: [] });
-                });
-
-                collector2.on('end', (collected, reason) => {
-                    if (reason === 'time') {
-                        rouletteDash.setDescription(`You timed out!`);
-                        rouletteDash.setFooter({text: `You have bet ${betAmt} coins.`});
-                        interaction.channel.send({ embeds: [rouletteDash], components: [], files: [] });
-                    }
-                });
-                collector.stop();
-            }
+            } 
         })
         collector.on('end', (collected, reason) => {
             if (reason === 'time') {
