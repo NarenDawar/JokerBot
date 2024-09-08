@@ -9,7 +9,7 @@ module.exports = {
     async execute(interaction, profileData) {
         const {embedColor, jobTitle} = profileData;
         const { workLastUsed } = profileData;
-        const {id} = interaction.user;
+        const id = interaction.user.id;
 
         let workDash = new EmbedBuilder()
         .setTitle('Hourly Wage 👷')
