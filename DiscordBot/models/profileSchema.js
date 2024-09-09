@@ -12,7 +12,6 @@ const profileSchema = new mongoose.Schema({
     numOfWins: {type: Number, default: 0},
     jobTitle: {type: String, default: "Construction Worker"},
     bankBalance: {type: Number, default: 0},
-    numOfWorkers: {type: Number, default: 0}
 });
 
 const model = mongoose.model("jokerdb", profileSchema);

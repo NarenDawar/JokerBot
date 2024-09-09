@@ -42,7 +42,7 @@ module.exports = {
         }
 
         await profileModel.findOneAndUpdate(
-            { userId: id },
+            { id },
             {
                 $set: {
                     workLastUsed: Date.now(),
