@@ -10,7 +10,8 @@ const { SlashCommandBuilder, EmbedBuilder,ActionRowBuilder, ButtonBuilder, Butto
 
 const client = new Client({
     intents: [
-        GatewayIntentBits.Guilds,
+        GatewayIntentBits.Guilds,	
+		GatewayIntentBits.GuildMessages	
     ],
 });
 // Event Handling Below

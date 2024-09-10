@@ -18,7 +18,7 @@ module.exports = {
         
     async execute(interaction, profileData) {
         await interaction.deferReply();
-        const userId = interaction.user.id;
+        const {id} = interaction.user;
         const betAmt = interaction.options.getInteger('amount');
         const { coins, embedColor } = profileData;
 
@@ -50,11 +50,11 @@ module.exports = {
             Game.startGame();
             Game.on('gameOver', async result => {
                 if(result === 'win') {
-                    await profileModel.findOneAndUpdate({userId}, { $inc: {coins: 2*betAmt}});
+                    await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: 2*betAmt}});
                     interaction.followUp(`You **hit**! You have won **${betAmt*2}** coins!`);
                 }
                 else {
-                    await profileModel.findOneAndUpdate({userId}, { $inc: {coins: -betAmt}});
+                    await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: -betAmt}});
                     interaction.followUp(`You **missed**! You have lost **${betAmt}** coins!`);
                 }
             })

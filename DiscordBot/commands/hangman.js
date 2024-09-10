@@ -17,7 +17,7 @@ module.exports = {
     
     async execute(interaction, profileData) {
         await interaction.deferReply();
-        const userId = interaction.user.id;
+        const {id} = interaction.user;
         const betAmt = interaction.options.getInteger('amount');
         const { coins, embedColor } = profileData;
 
@@ -38,7 +38,7 @@ module.exports = {
 
             const Game = new Hangman({
                 message: interaction,
-                isSlashGame: false,
+                isSlashGame: true,
                 embed: {
                   title: 'Hangman',
                   color: embedColor.toString(),
@@ -54,10 +54,10 @@ module.exports = {
             Game.startGame();
             Game.on('gameOver', async result => {
                 if(result.result === 'win') {
-                    await profileModel.findOneAndUpdate({userId}, { $inc: {coins: betAmt}});
+                    await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: betAmt}});
                 }
                 else {
-                    await profileModel.findOneAndUpdate({userId}, { $inc: {coins: -betAmt}});
+                    await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: -betAmt}});
                 }
             });
         }

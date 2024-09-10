@@ -11,7 +11,6 @@ module.exports = {
     async execute(interaction, profileData) {
         const { id } = interaction.user;
         const { dailyLastUsed } = profileData;
-        const { coins } = profileData;
         const {embedColor} = profileData;
 
         const now = new Date();
@@ -21,7 +20,7 @@ module.exports = {
         .setTitle('Daily Coins 💸')
         .setColor(embedColor);
 
-        const cooldown = 864000;
+        const cooldown = 86400000;
         const timeLeft = cooldown - (Date.now() - dailyLastUsed);
 
         if (timeLeft > 0) {

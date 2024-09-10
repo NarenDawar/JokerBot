@@ -1,5 +1,5 @@
 const { Minesweeper  } = require('discord-gamecord');
-const {SlashCommandBuilder, EmbedBuilder,ActionRowBuilder, ButtonBuilder, ButtonStyle} = require("discord.js");
+const {SlashCommandBuilder, EmbedBuilder} = require("discord.js");
 const { minBet, maxBet } = require("../globalValues.json");
 const profileModel = require("../models/profileSchema");
 
@@ -17,7 +17,7 @@ module.exports = {
     
     async execute(interaction, profileData) {
         await interaction.deferReply();
-        const userId = interaction.user.id;
+        const {id} = interaction.user;
         const betAmt = interaction.options.getInteger('amount');
         const { coins, embedColor } = profileData;
 
@@ -38,7 +38,7 @@ module.exports = {
 
         const Game = new Minesweeper({
             message: interaction,
-            isSlashGame: false,
+            isSlashGame: true,
             embed: {
               title: 'Minesweeper',
               color: embedColor.toString(),
@@ -48,17 +48,17 @@ module.exports = {
             mines: 5,
             timeoutTime: 60000,
             winMessage: `You won the Game! You successfully avoided all the mines. You won ${betAmt} coins`,
-            loseMessage: `You lost the Game! Beaware of the mines next time. You lost ${betAmt}`,
+            loseMessage: `You lost the Game! Beaware of the mines next time. You lost ${betAmt} coins`,
             playerOnlyMessage: 'Only {player} can use these buttons.'
           });
 
             Game.startGame();
             Game.on('gameOver', async result => {
                 if(result.result === 'win') {
-                    await profileModel.findOneAndUpdate({userId}, { $inc: {coins: betAmt}});
+                    await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: betAmt}});
                 }
                 else {
-                    await profileModel.findOneAndUpdate({userId}, { $inc: {coins: -betAmt}});
+                    await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: -betAmt}});
                 }
             });
         }
