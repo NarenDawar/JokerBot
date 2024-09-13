@@ -100,7 +100,7 @@ module.exports = {
                     } else {
                         await profileModel.findOneAndUpdate (
                             { userId: id },
-                            { $inc: { coins: -betAmt, }, }
+                            { $inc: { coins: -betAmt }, }
                         );
                         rouletteDash.setDescription(`You **missed**!`)
                         rouletteDash.setFooter({text: `You have lost ${betAmt} coins.`});

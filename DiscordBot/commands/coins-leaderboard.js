@@ -3,8 +3,8 @@ const profileModel = require("../models/profileSchema");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("coins-leaderboard")
-        .setDescription("Shows the top 10 earners!"),
+        .setName("global-coins-leaderboard")
+        .setDescription("Shows the top 10 earners globally!"),
     async execute(interaction, profileData) {
         await interaction.deferReply();
 

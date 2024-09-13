@@ -1,12 +1,12 @@
-const { Hangman } = require('discord-gamecord');
+const { MatchPairs } = require('discord-gamecord');
 const {SlashCommandBuilder, EmbedBuilder,ActionRowBuilder, ButtonBuilder, ButtonStyle} = require("discord.js");
 const { minBet, maxBet } = require("../globalValues.json");
 const profileModel = require("../models/profileSchema");
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('hangman')
-    .setDescription('Bet on a hangman game!')
+    .setName('match-pairs')
+    .setDescription('Bet on a match pairs game!')
     .addIntegerOption((option) => 
         option
             .setName("amount")
@@ -22,7 +22,7 @@ module.exports = {
         const { coins, embedColor } = profileData;
 
         const hangDash = new EmbedBuilder()
-            .setTitle("Hangman 👷‍♂️")
+            .setTitle("Match Pairs 🍐")
             .setTimestamp()
             .setColor(embedColor);
 
@@ -36,18 +36,18 @@ module.exports = {
             return await interaction.editReply({ embeds : [hangDash]});
         }
 
-            const Game = new Hangman({
+            const Game = new MatchPairs({
                 message: interaction,
                 isSlashGame: true,
                 embed: {
-                  title: 'Hangman',
+                  title: 'Match Pairs',
                   color: embedColor.toString(),
-                  description: "You have one minute to guess the answer."
+                  description: "Match the pairs! 10 second timer!"
                 },
-                hangman: { hat: '🎩', head: '😟', shirt: '👕', pants: '🩳', boots: '👞👞' },
-                timeoutTime: 60000,
-                winMessage: `You won ${betAmt} coins! The word was **{word}**.`,
-                loseMessage: `You lost ${betAmt} coins! The word was **{word}**.`,
+                emojis: ['🍉', '🍇', '🍊', '🥭', '🍎', '🍏', '🥝', '🥥', '🍓', '🫐', '🍍', '🥕', '🥔'],
+                timeoutTime: 10000,
+                winMessage: `You won ${betAmt} coins!.`,
+                loseMessage: `You lost ${betAmt} coins!.`,
                 playerOnlyMessage: 'Only {player} can use these buttons.'
               });
 

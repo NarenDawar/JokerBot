@@ -38,15 +38,10 @@ module.exports = {
         }
 
 
-        const recievingUserData = await profileModel.findOneAndUpdate(
+        const recievingUserData = await profileModel.findOne(
             {
                 userId: recievingUser.id,
             },
-            {
-                $inc: {
-                    coins: donationAmt,
-                },
-            }
         );
 
         if(!recievingUserData) {
@@ -64,6 +59,17 @@ module.exports = {
             {
                 $inc: {
                     coins: -donationAmt,
+                },
+            }
+        );
+
+        await profileModel.findOneAndUpdate (
+            {
+                userId: recievingUser.id,
+            },
+            {
+                $inc: {
+                    coins: donationAmt,
                 },
             }
         );

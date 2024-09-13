@@ -3,23 +3,24 @@ const profileModel = require("../models/profileSchema");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("global-wins-leaderboard")
-        .setDescription("Shows the top 10 winners (players with most wins) globally!"),
+        .setName("local-wins-leaderboard")
+        .setDescription("Shows the top 10 winners (players with most wins) within your guild!"),
     async execute(interaction, profileData) {
         await interaction.deferReply();
 
         const { username, id } = interaction.user;
-        const { coins, numOfWins } = profileData;
+        const { numOfWins } = profileData;
         const { embedColor } = profileData;
+        const serverId = interaction.guild.id;
 
         let leaderboardEmbed = new EmbedBuilder()
-            .setTitle("Top 10 Winners 🏆")
+            .setTitle("Top 10 Local Winners 🏆")
             .setColor(embedColor)
             .setTimestamp()
             .setFooter({ text: "You are not ranked yet."});
 
         const members = await profileModel
-            .find()
+            .find({serverId: serverId})
             .sort({numOfWins: -1})
             .catch((err) => console.log(err));
 

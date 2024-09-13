@@ -59,7 +59,7 @@ module.exports = {
             Game.startGame();
             Game.on('gameOver', async result => {
                 if(result.result === 'win') {
-                    await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: betAmt}});
+                    await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: betAmt, numOfWins: 1}});
                 }
                 else {
                     await profileModel.findOneAndUpdate({userId: id}, { $inc: {coins: -betAmt}});

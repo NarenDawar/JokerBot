@@ -40,6 +40,7 @@ module.exports = {
             `**Username**: ${recievingUser.username}\n\n` +
             `**Balance**: ${recievingUserData.coins} coins\n\n` +
             `**Wins**: ${recievingUserData.numOfWins}\n\n` +
+            `**Rank**: ${recievingUserData.prestige}\n\n` +
             `**Title**: ${recievingUserData.customTitle}\n\n` +
             `**Phrase**: ${recievingUserData.customPhrase}\n\n` +
             `**Selected Embed Color**: ${recievingUserData.embedColor}\n\n` +

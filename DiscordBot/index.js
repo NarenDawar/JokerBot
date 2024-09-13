@@ -1,6 +1,7 @@
 // Can add GUILDID to env document for local experimentation.
 require("dotenv").config();
 const fs = require("node:fs");
+const cron = require('node-cron');
 const path = require("node:path");
 const mongoose = require("mongoose");
 const {DISCORD_TOKEN: token, MONGODB_SRV: database }= process.env;
@@ -63,6 +64,8 @@ mongoose.connect(database, {
 
 const profileModel = require("./models/profileSchema");
 
+// BANK BALANCE CODE -----------------------------------------
+
 
 let messageCount = new Map();
 
@@ -113,6 +116,41 @@ client.on('interactionCreate', async interaction => {
 			await interaction.update({ content: `Claim Successful! **${claimCoins}** coins have been added to your balance.`, components: [row]})
 	}
 })
+// BANK BALANCE CODE -----------------------------------------
+const updateDailyBalances = async () => {
+    const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    const now = Date.now();
+    
+    const profiles = await profileModel.find();
+    
+    for (const profile of profiles) {
+        const { userId, lastDailyUpdate, bankBalance } = profile;
+        if (now - new Date(lastDailyUpdate).getTime() >= oneDay) {
+            const newBalance = bankBalance * 1.1;
+            await profileModel.findOneAndUpdate(
+                { userId },
+                { $set: { coins: newBalance, lastDailyUpdate: now } }
+            );
+        }
+    }
+};
+
+// Schedule the daily balance update
+cron.schedule('0 0 * * *', () => {
+    console.log('Running daily balance update...');
+    updateDailyBalances().catch(console.error);
+});
+
+// Ensure the update function runs on bot startup
+(async () => {
+    try {
+        console.log('Updating daily balances on startup...');
+        await updateDailyBalances();
+        console.log('Update complete.');
+    } catch (error) {
+        console.error('Error updating daily balances:', error);
+    }
+})();
 
 
 client.login(token);
