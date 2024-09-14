@@ -57,7 +57,7 @@ module.exports = {
         }
 
         // Randomize robbery outcome
-        const success = Math.random() < 0.3; 
+        const success = Math.random() < 0.4; 
         const robberyAmount = Math.floor(Math.random() * 50) + 50; // Rob between 50 and 150 coins
 
         if (success) {
