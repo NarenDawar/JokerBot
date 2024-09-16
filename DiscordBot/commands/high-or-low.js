@@ -13,7 +13,7 @@ module.exports = {
                 .setMinValue(1)
             ),
     async execute(interaction, profileData) {
-        const {embedColor} = profileData;
+        const {embedColor, coins} = profileData;
         const betAmt = interaction.options.getInteger('amount');
         const {id} = interaction.user.id;
         // Initial game setup
@@ -28,6 +28,10 @@ module.exports = {
             .setColor(embedColor)
             .setTimestamp();
 
+        if (coins < betAmt) {
+            hOLembed.setDescription(`You do not have **${betAmt}** coins.`);
+            return await interaction.reply({ embeds : [hangDash]});
+        }
         // Create buttons
         const higherButton = new ButtonBuilder()
             .setCustomId('higher')

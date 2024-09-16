@@ -17,7 +17,6 @@ const profileSchema = new mongoose.Schema({
     lastDailyUpdate: {type: Date, default: Date.now}
 });
 
-// Avoid redefining the model if it already exists
 const model = mongoose.models.jokerdb || mongoose.model("jokerdb", profileSchema);
 
 module.exports = model;

@@ -121,9 +121,16 @@ cron.schedule('0 0 * * *', async () => {
     try {
         const users = await profileModel.find({});
         for (const user of users) {
-            await profileModel.findOneAndUpdate({ userId: user.userId }, { $inc: { bankBalance: 0.3 } });
+            // Calculate the new bank balance by increasing it by 0.5%
+            const newBankBalance = Math.round(user.bankBalance * 1.005);
+            
+            // Update the user's bank balance
+            await profileModel.findOneAndUpdate(
+                { userId: user.userId },
+                { $set: { bankBalance: newBankBalance } }
+            );
         }
-        console.log("Bank balances updated by 0.3 for all users.");
+        console.log("Bank balances updated by 0.5% for all users and rounded to whole numbers.");
     } catch (err) {
         console.error("Error updating bank balances: ", err);
     }
