@@ -14,12 +14,14 @@ module.exports = {
         const guild = interaction.guild;
 
         let leaderboardEmbed = new EmbedBuilder()
-            .setTitle("Top 10 Winners 🏆")
+            .setTitle("Top 10 Local Winners 🏆")
             .setColor(embedColor)
             .setTimestamp();
 
         // Fetch all users who have interacted with the bot at some point
         const allMembers = await profileModel.find().sort({ numOfWins: -1 }).catch(err => console.log(err));
+
+        //for local, retrieve all server users, check if they are in the database, then rank them.
 
         // Filter users who are part of the current server
         const guildMembers = allMembers.filter(member => guild.members.cache.has(member.userId));
@@ -42,13 +44,15 @@ module.exports = {
         let description = "";
         for (let i = 0; i < topTen.length; i++) {
             let user = await interaction.client.users.fetch(topTen[i].userId);
-            if (!user) return;
+            if (!user) continue; // Ensure user exists
             let userWins = topTen[i].numOfWins;
             description += `${i + 1}. ${user.username}: ${userWins} wins\n`;
         }
 
         if (description != "") {
             leaderboardEmbed.setDescription(description);
+        } else {
+            leaderboardEmbed.setDescription("No winners found in this guild.");
         }
 
         await interaction.editReply({ embeds: [leaderboardEmbed] });

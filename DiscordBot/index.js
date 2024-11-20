@@ -65,8 +65,6 @@ mongoose.connect(database, {
 const profileModel = require("./models/profileSchema");
 
 // BANK BALANCE CODE -----------------------------------------
-
-
 let messageCount = new Map();
 
 client.on('messageCreate', async message => {
@@ -75,12 +73,12 @@ client.on('messageCreate', async message => {
 	const channelId = message.channel.id;
 	messageCount.set(channelId, (messageCount.get(channelId) || 0) + 1);
 
-	if(messageCount.get(channelId) === 20) {
+	if(messageCount.get(channelId) === 40) {
 		const embeder = new EmbedBuilder()
 			.setTitle("Surprise Drop")
 			.setDescription('Claim your coins!')
 			.setColor('Red')
-			.addFields({ name: 'Amount' , value: `${Math.floor(Math.random() * 700 - 100 + 1)} coins`})
+			.addFields({ name: 'Amount' , value: `??? coins`})
 			.setTimestamp();
 
 		const row = new ActionRowBuilder()
@@ -99,9 +97,8 @@ client.on('messageCreate', async message => {
 
 client.on('interactionCreate', async interaction => {
 	if(interaction.customId === 'claim') {
+		const claimCoins = Math.floor(Math.random() * 700 - 100 + 1);
 		const userId = interaction.user.id;
-		
-			const claimCoins = Math.floor(Math.random() * (700 - 100 + 1));
 			await profileModel.findOneAndUpdate({ userId}, {$inc : {coins: claimCoins}});
 
 			const row = new ActionRowBuilder()
